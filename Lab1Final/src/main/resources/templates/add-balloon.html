@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Ballon</title>
+</head>
+<body>
+<form action="/balloons/add" method="POST">
+    <input id="id" type="hidden" name="id" th:value="(${balloon} != null ? ${balloon.getId()} : '')">
+    <div >
+        <div>
+            <label for="name">Balloon ame</label>
+        <input type="text"
+               class="form-control"
+               id="name"
+               name="name"
+               th:value="(${balloon} != null ? ${balloon.getName()} : '')"
+               required
+               placeholder="Enter balloon name">
+    </div>
+        <div>
+            <label for="description">Ballon Description</label>
+            <input type="text" id="description" name="description"  th:value="(${balloon} != null ? ${balloon.getDescription()} : '')" placeholder="Enter balloon description">
+
+        </div>
+    <div >
+    <div class="form-group">
+        <label>Manufacturer</label>
+        <select name="manufacturerID" class="form-control">
+            <option th:if="${balloon} != null"
+                    th:selected="${balloon.getManufacturer() != null && balloon.getManufacturer().getId() == man.getId()}"
+                    th:each="man : ${manufacturers}"
+                    th:value="${man.getId()}"
+                    th:text="${man.getName()}"
+                  >
+            </option>
+            <option th:if="${balloon} == null"
+                    th:each="man : ${manufacturers}"
+                    th:value="${man.getId()}"
+                    th:text="${man.getName()}">
+            </option>
+        </select>
+
+
+    <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+    <a type="button" class="btn btn-primary" href="/balloons">Back</a>
+</form>
+</body>
+</html>

@@ -28,7 +28,7 @@ public class BalloonListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         WebContext webContext=new WebContext(req,resp, req.getServletContext());
-        webContext.setVariable("balloons",balloonService.listAll());
+      //  webContext.setVariable("balloons",balloonService.listAll());
         engine.process("listBallons.html",webContext,resp.getWriter());
     }
 
