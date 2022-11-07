@@ -5,6 +5,7 @@ import mk.finki.ukim.model.Manufacturer;
 import mk.finki.ukim.model.exceptions.ManufacturerDoesntExistException;
 import mk.finki.ukim.service.BalloonService;
 import mk.finki.ukim.service.ManufacturerService;
+import mk.finki.ukim.service.OrderService;
 import mk.finki.ukim.service.impl.BallonServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +19,12 @@ public class BaloonController {
 
     private final BalloonService balloonService;
     private final ManufacturerService manufacturerService;
+    private final OrderService orderService;
 
-    public BaloonController(BalloonService balloonService,ManufacturerService manufacturerService) {
+    public BaloonController(BalloonService balloonService,ManufacturerService manufacturerService,OrderService orderService) {
         this.balloonService = balloonService;
         this.manufacturerService=manufacturerService;
+        this.orderService=orderService;
     }
 
     @GetMapping("/balloons")
@@ -73,6 +76,13 @@ public class BaloonController {
     {
         this.balloonService.deleteById(id);
         return "redirect:/balloons";
+    }
+
+    @GetMapping("/orders")
+    public String getOrdersPage(Model model)
+    {
+        model.addAttribute("order",orderService.getOrder());
+        return "userOrders";
     }
 
 }

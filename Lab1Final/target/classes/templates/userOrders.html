@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders</title>
+</head>
+<body>
+<h1>User orders</h1>
+<div>
+    <p>Client name:<th:block th:text="${order.getClientName()}"></th:block></p>
+    <p>Client adress:<th:block th:text="${order.getClientAddress()}"></th:block></p>
+    <p>Balloon Color:<th:block th:text="${order.getBalloonColor()}"></th:block></p>
+
+</div>
+
+</body>
+</html>
