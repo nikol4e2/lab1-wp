@@ -1,7 +1,8 @@
 package mk.finki.ukim.service.impl;
 
 import mk.finki.ukim.model.Order;
-import mk.finki.ukim.repository.OrderRepository;
+import mk.finki.ukim.repository.impl.InMemoryOrderRepository;
+import mk.finki.ukim.repository.jpa.OrderRepository;
 import mk.finki.ukim.service.OrderService;
 import org.springframework.stereotype.Service;
 
@@ -19,23 +20,23 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order placeOrder(String ballonColor, String clientName, String adress) {
-        Order order=new Order(ballonColor,clientName,adress,(long) orderRepository.gettAllOrders().size()  );
-        orderRepository.addOrder(order);
+        Order order=new Order(ballonColor );
+        orderRepository.save(order);
         return order;
     }
 
     @Override
     public Order getOrder() {
-        return orderRepository.gettAllOrders().get(orderRepository.gettAllOrders().size()-1);
+        return orderRepository.findAll().get(orderRepository.findAll().size()-1);
     }
 
     @Override
     public Order getActiveOrder() {
-        return orderRepository.getActiveOrder();
+        return orderRepository.findAll().get(orderRepository.findAll().size()-1);
     }
 
     @Override
     public List<Order> getAllOrders() {
-        return orderRepository.gettAllOrders();
+        return orderRepository.findAll();
     }
 }

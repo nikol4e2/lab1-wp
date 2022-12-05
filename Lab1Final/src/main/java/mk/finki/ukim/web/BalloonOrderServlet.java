@@ -38,8 +38,8 @@ public class BalloonOrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name=req.getParameter("clientName");
         String adress=req.getParameter("clientAddress");
-        orderService.getOrder().setClientAddress(adress);
-        orderService.getOrder().setClientName(name);
+        orderService.getOrder().setUserAddress(adress);
+        orderService.getOrder().setUsername(name);
         req.getSession().setAttribute("adress",adress);
         req.getSession().setAttribute("name",name);
         resp.sendRedirect("/ConfirmationInfo");

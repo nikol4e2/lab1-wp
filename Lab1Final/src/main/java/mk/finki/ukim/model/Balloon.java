@@ -2,11 +2,20 @@ package mk.finki.ukim.model;
 
 import lombok.Data;
 
+import javax.persistence.*;
+
 @Data
+@Entity
 public class Balloon {
     String name;
     String description;
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
+    @ManyToOne
     Manufacturer manufacturer;
 
     public Balloon(String name) {
@@ -22,10 +31,13 @@ public class Balloon {
     {
         this.name = name;
         this.description = description;
-        id=(long)(Math.random()*1000);
+
         this.manufacturer=manufacturer;
     }
 
 
 
+    public Balloon() {
+
+    }
 }

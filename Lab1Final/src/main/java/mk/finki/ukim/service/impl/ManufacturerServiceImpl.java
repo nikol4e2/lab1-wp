@@ -1,7 +1,8 @@
 package mk.finki.ukim.service.impl;
 
 import mk.finki.ukim.model.Manufacturer;
-import mk.finki.ukim.repository.ManufacturerRepository;
+import mk.finki.ukim.repository.impl.InMemoryManufacturerRepository;
+import mk.finki.ukim.repository.jpa.ManufacturerRepository;
 import mk.finki.ukim.service.ManufacturerService;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,6 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Optional<Manufacturer> findManufacturerByID(long id) {
-       return manufacturerRepository.getManufacturerByID(id);
+       return manufacturerRepository.findById(id);
     }
 }

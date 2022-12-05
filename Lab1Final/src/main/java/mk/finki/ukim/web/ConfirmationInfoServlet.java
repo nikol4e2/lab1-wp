@@ -33,8 +33,8 @@ public class ConfirmationInfoServlet extends HttpServlet {
         webContext.setVariable("ip",req.getRemoteAddr());
         webContext.setVariable("browser",req.getHeader("User-Agent"));
         webContext.setVariable("order",orderService.getOrder());;
-        req.getSession().setAttribute("name",orderService.getOrder().getClientName());
-        req.getSession().setAttribute("adress",orderService.getOrder().getClientAddress());
+        req.getSession().setAttribute("name",orderService.getOrder().getUsername());
+        req.getSession().setAttribute("adress",orderService.getOrder().getUserAddress());
 
         engine.process("confirmationInfo.html",webContext,resp.getWriter());
 
