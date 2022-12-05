@@ -81,7 +81,8 @@ public class BaloonController {
     @GetMapping("/orders")
     public String getOrdersPage(Model model)
     {
-        model.addAttribute("order",orderService.getOrder());
+        model.addAttribute("orders",orderService.getAllOrders());
+        model.addAttribute("activeOrder",orderService.getOrder());
         return "userOrders";
     }
 

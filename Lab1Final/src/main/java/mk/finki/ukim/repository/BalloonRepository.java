@@ -16,16 +16,16 @@ public class BalloonRepository {
     List<Balloon> balloons=new ArrayList<>();
 
     public BalloonRepository() {
-        balloons.add(new Balloon("ballon 1","ballon one"));
-        balloons.add(new Balloon("ballon 2","ballon two"));
-        balloons.add(new Balloon("ballon 3","ballon three"));
-        balloons.add(new Balloon("ballon 4","ballon four"));
-        balloons.add(new Balloon("ballon 5","ballon five"));
-        balloons.add(new Balloon("ballon 6","ballon six"));
-        balloons.add(new Balloon("ballon 7","ballon seven"));
-        balloons.add(new Balloon("ballon 8","ballon egiht"));
-        balloons.add(new Balloon("ballon 9","ballon nine"));
-        balloons.add(new Balloon("ballon 10","ballon ten"));
+        balloons.add(new Balloon("balloon 1","balloon one"));
+        balloons.add(new Balloon("balloon 2","balloon two"));
+        balloons.add(new Balloon("balloon 3","balloon three"));
+        balloons.add(new Balloon("balloon 4","balloon four"));
+        balloons.add(new Balloon("balloon 5","balloon five"));
+        balloons.add(new Balloon("balloon 6","balloon six"));
+        balloons.add(new Balloon("balloon 7","balloon seven"));
+        balloons.add(new Balloon("balloon 8","balloon eight"));
+        balloons.add(new Balloon("balloon 9","balloon nine"));
+        balloons.add(new Balloon("balloon 10","balloon ten"));
 
 
     }

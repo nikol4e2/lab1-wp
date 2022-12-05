@@ -7,9 +7,17 @@
 <body>
 <h1>User orders</h1>
 <div>
-    <p>Client name:<th:block th:text="${order.getClientName()}"></th:block></p>
-    <p>Client adress:<th:block th:text="${order.getClientAddress()}"></th:block></p>
-    <p>Balloon Color:<th:block th:text="${order.getBalloonColor()}"></th:block></p>
+    <p>Client name:<th:block th:text="${activeOrder.getClientName()}"></th:block></p>
+    <p>Client adress:<th:block th:text="${activeOrder.getClientAddress()}"></th:block></p>
+    <ul>
+
+    <li th:each="order : ${orders} ">
+        <span>Balloon color: </span><th:block th:text="${order.getBalloonColor()}"></th:block>
+               <span>   Balloon size: </span> <th:block th:text="${order.getBalloonSize()}"></th:block>
+    </li>
+    </ul>
+
+
 
 </div>
 

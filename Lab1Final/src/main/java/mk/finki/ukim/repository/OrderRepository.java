@@ -23,4 +23,8 @@ public class OrderRepository {
         orders.add(order);
 
     }
+    public Order getActiveOrder()
+    {
+        return orders.get(orders.size()-1);
+    }
 }
