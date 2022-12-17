@@ -9,7 +9,7 @@
     <input id="id" type="hidden" name="id" th:value="(${balloon} != null ? ${balloon.getId()} : '')">
     <div >
         <div>
-            <label for="name">Balloon ame</label>
+            <label for="name">Balloon name</label>
         <input type="text"
                class="form-control"
                id="name"
@@ -19,7 +19,7 @@
                placeholder="Enter balloon name">
     </div>
         <div>
-            <label for="description">Ballon Description</label>
+            <label for="description">Balloon Description</label>
             <input type="text" id="description" name="description"  th:value="(${balloon} != null ? ${balloon.getDescription()} : '')" placeholder="Enter balloon description">
 
         </div>
@@ -44,6 +44,7 @@
 
     <button id="submit" type="submit" class="btn btn-primary">Submit</button>
     <a type="button" class="btn btn-primary" href="/balloons">Back</a>
+    </div>
 </form>
 </body>
 </html>

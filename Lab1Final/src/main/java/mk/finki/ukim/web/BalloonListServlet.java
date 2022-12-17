@@ -1,7 +1,9 @@
 package mk.finki.ukim.web;
 
+import mk.finki.ukim.model.User;
 import mk.finki.ukim.service.BalloonService;
 import mk.finki.ukim.service.OrderService;
+import mk.finki.ukim.service.UserService;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
@@ -18,11 +20,13 @@ public class BalloonListServlet extends HttpServlet {
     private final BalloonService balloonService;
     private final SpringTemplateEngine engine;
     private final OrderService orderService;
+    private final UserService userService;
 
-    public BalloonListServlet(BalloonService balloonService, SpringTemplateEngine engine, OrderService orderService) {
+    public BalloonListServlet(BalloonService balloonService, SpringTemplateEngine engine, OrderService orderService,UserService userService) {
         this.balloonService = balloonService;
         this.engine = engine;
         this.orderService = orderService;
+        this.userService=userService;
     }
 
     @Override
@@ -35,10 +39,13 @@ public class BalloonListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String color=req.getParameter("color");
+
         orderService.placeOrder(color,"prazno","prazna");
 
-        req.getSession().setAttribute("color",color);
 
+        req.getSession().setAttribute("color",color);
+        User u=(User)req.getSession().getAttribute("activeUser");
+        u.addNewCart();
         resp.sendRedirect("/selectBalloon");
 
     }

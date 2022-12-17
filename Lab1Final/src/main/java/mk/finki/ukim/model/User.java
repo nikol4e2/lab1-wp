@@ -34,6 +34,20 @@ public class User {
         this.carts = carts;
     }
 
+    public User(String username, String name, String surname, String password, LocalDate dateOfBirth) {
+
+        this.username = username;
+        this.name = name;
+        this.surname = surname;
+        this.password = password;
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public void addNewCart()
+    {
+        carts.add(new ShoppingCart());
+    }
+
     public User() {
 
     }

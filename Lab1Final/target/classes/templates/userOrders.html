@@ -7,8 +7,8 @@
 <body>
 <h1>User orders</h1>
 <div>
-    <p>Client name:<th:block th:text="${activeOrder.getClientName()}"></th:block></p>
-    <p>Client adress:<th:block th:text="${activeOrder.getClientAddress()}"></th:block></p>
+    <p>Client name:<th:block th:text="${activeOrder.getUsername()}"></th:block></p>
+    <p>Client adress:<th:block th:text="${activeOrder.getUserAddress()}"></th:block></p>
     <ul>
 
     <li th:each="order : ${orders} ">
