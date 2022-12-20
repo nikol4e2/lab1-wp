@@ -38,7 +38,7 @@ public class BaloonController {
     {
             model.addAttribute("balloons",balloonService.listAll());
             model.addAttribute("manufacturers",manufacturerService.listAll());
-            return "listBallons.html";
+            return "listBallons";
     }
 
     @GetMapping("/balloons/add")

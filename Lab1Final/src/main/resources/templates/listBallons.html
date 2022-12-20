@@ -15,6 +15,7 @@
 </header>
 <main>
     <h3>Balloons</h3>
+    <a href="/login">Login</a>
     <ul>
         <li th:each="balloon : ${balloons} "><th:block th:text="${balloon.name}"></th:block> <th:block th:text="${balloon.description}"></th:block>
             <th:block sec:authorize="hasRole('ROLE_ADMIN')">
@@ -42,6 +43,10 @@
         <input type="radio" name="color" value="Blue Balloon"> Blue Balloon<br/>
         <input type="submit" value="submit">
     </form>
+
+
+
+
 
 
 

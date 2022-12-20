@@ -58,7 +58,7 @@ public class UserRegistrationTest {
     @Test
     public void testNullUsername() throws UserAlreadyExistsEception, InvalidArgumentException {
         Assert.assertThrows("InvalidArgumentException expected", InvalidArgumentException.class,()->this.service.registerUser(null,"name","surname","password",LocalDate.now(),Role.ROLE_USER));
-        Mockito.verify(this.service).registerUser(null,"name","surename","password",LocalDate.now(),Role.ROLE_USER);
+        Mockito.verify(this.service).registerUser(null,"name","surname","password",LocalDate.now(),Role.ROLE_USER);
     }
 
     @Test
@@ -66,8 +66,8 @@ public class UserRegistrationTest {
         String username="";
         String password="password";
         Assert.assertThrows("InvalidArgumentException expected",InvalidArgumentException.class,
-                ()->this.service.registerUser(username,"name","surename",password,LocalDate.now(),Role.ROLE_USER));
-        Mockito.verify(this.service).registerUser(username,"name","surename",password,LocalDate.now(),Role.ROLE_USER);
+                ()->this.service.registerUser(username,"name","surname",password,LocalDate.now(),Role.ROLE_USER));
+        Mockito.verify(this.service).registerUser(username,"name","surname",password,LocalDate.now(),Role.ROLE_USER);
     }
 
     @Test
@@ -75,8 +75,8 @@ public class UserRegistrationTest {
         String username="username";
         String password="";
         Assert.assertThrows("InvalidArgumentException expected",InvalidArgumentException.class,
-                ()->this.service.registerUser(username,"name","surename",password,LocalDate.now(),Role.ROLE_USER));
-        Mockito.verify(this.service).registerUser(username,"name","surename",password,LocalDate.now(),Role.ROLE_USER);
+                ()->this.service.registerUser(username,"name","surname",password,LocalDate.now(),Role.ROLE_USER));
+        Mockito.verify(this.service).registerUser(username,"name","surname",password,LocalDate.now(),Role.ROLE_USER);
     }
 
 
@@ -85,34 +85,34 @@ public class UserRegistrationTest {
         String username="username";
         String password=null;
         Assert.assertThrows("InvalidArgumentException expected",InvalidArgumentException.class,
-                ()->this.service.registerUser(username,"name","surename",password,LocalDate.now(),Role.ROLE_USER));
-        Mockito.verify(this.service).registerUser(username,"name","surename",password,LocalDate.now(),Role.ROLE_USER);
+                ()->this.service.registerUser(username,"name","surname",password,LocalDate.now(),Role.ROLE_USER));
+        Mockito.verify(this.service).registerUser(username,"name","surname",password,LocalDate.now(),Role.ROLE_USER);
     }
 
     @Test
     public void testNullName() throws UserAlreadyExistsEception, InvalidArgumentException {
         String name=null;
         Assert.assertThrows("InvalidArgumentException expected",InvalidArgumentException.class,
-                ()->this.service.registerUser("username",name,"surename","password",LocalDate.now(),Role.ROLE_USER));
-        Mockito.verify(this.service).registerUser("username",name,"surename","password",LocalDate.now(),Role.ROLE_USER);
+                ()->this.service.registerUser("username",name,"surname","password",LocalDate.now(),Role.ROLE_USER));
+        Mockito.verify(this.service).registerUser("username",name,"surname","password",LocalDate.now(),Role.ROLE_USER);
     }
 
     @Test
     public void testEmptyName() throws UserAlreadyExistsEception, InvalidArgumentException {
         String name="";
         Assert.assertThrows("InvalidArgumentException expected",InvalidArgumentException.class,
-                ()->this.service.registerUser("username",name,"surename","password",LocalDate.now(),Role.ROLE_USER));
-        Mockito.verify(this.service).registerUser("username",name,"surename","password",LocalDate.now(),Role.ROLE_USER);
+                ()->this.service.registerUser("username",name,"surname","password",LocalDate.now(),Role.ROLE_USER));
+        Mockito.verify(this.service).registerUser("username",name,"surname","password",LocalDate.now(),Role.ROLE_USER);
     }
 
     @Test
     public void testDuplicateUsername() throws UserAlreadyExistsEception, InvalidArgumentException {
-        User user=new User("username","name","surename","password",LocalDate.now(),Role.ROLE_USER);
+        User user=new User("username","name","surname","password",LocalDate.now(),Role.ROLE_USER);
         Mockito.when(this.userRepository.findByUsername(Mockito.anyString())).thenReturn(Optional.of(user));
         String username="username";
         Assert.assertThrows("UserAlreadyExistsException expected", UserAlreadyExistsEception.class,
-                ()->this.service.registerUser(username,"name","surename","password",LocalDate.now(),Role.ROLE_USER));
-        Mockito.verify(this.service).registerUser(username,"name","surename","password",LocalDate.now(),Role.ROLE_USER);
+                ()->this.service.registerUser(username,"name","surname","password",LocalDate.now(),Role.ROLE_USER));
+        Mockito.verify(this.service).registerUser(username,"name","surname","password",LocalDate.now(),Role.ROLE_USER);
     }
 
 
