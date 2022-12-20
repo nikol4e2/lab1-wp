@@ -1,6 +1,9 @@
 package mk.finki.ukim.web.controller;
 
 import mk.finki.ukim.model.User;
+import mk.finki.ukim.model.enumerations.Role;
+import mk.finki.ukim.model.exceptions.InvalidArgumentException;
+import mk.finki.ukim.model.exceptions.UserAlreadyExistsEception;
 import mk.finki.ukim.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,13 +32,12 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String createNewUser(@RequestParam String username , @RequestParam String name , @RequestParam String surname, @RequestParam String password, @RequestParam String date)
-    {
+    public String createNewUser(@RequestParam String username , @RequestParam String name , @RequestParam String surname, @RequestParam String password, @RequestParam String date,@RequestParam Role role) throws UserAlreadyExistsEception, InvalidArgumentException {
        // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
        // LocalDate localDate=formatter.parse(date, LocalDate::from);
         LocalDate dateNow=LocalDate.now();
 
-        userService.registerUser(username,name,surname,password,dateNow);
+        userService.registerUser(username,name,surname,password,dateNow, role);
         return "login";
     }
 

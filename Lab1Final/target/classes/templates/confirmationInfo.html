@@ -29,27 +29,30 @@
         </tr>
         <tr>
             <td><b>Client Name </b></td>
-            <td><th:block th:text="${order.getUsername()}"></th:block></td>
+            <td><th:block th:text="${session.name}"></th:block>
+                <th:block th:if="${#request.getRemoteUser()!=null}" th:text="${#request.getRemoteUser()}"></th:block></td>
         </tr>
         <tr>
             <td><b>Client Address </b></td>
-            <td><th:block th:text="${order.getUserAddress()}"></th:block></td>
+            <td><th:block th:text="${session.address}"></th:block>
+
+            </td>
         </tr>
         <tr>
             <td><b>Client IP Address</b></td>
-            <td><th:block th:text="${ip}"></th:block></td>
+            <td><th:block th:text="${session.ip}"></th:block></td>
         </tr>
         <tr>
             <td><b>Client Browser</b></td>
-            <td><th:block th:text="${browser}"></th:block></td>
+            <td><th:block th:text="${session.browser}"></th:block></td>
         </tr>
         <tr>
             <td><b>Balloon Color </b></td>
-            <td><th:block th:text="${order.getBalloonColor()}"></th:block></td>
+            <td><th:block th:text="${session.color}"></th:block></td>
         </tr>
         <tr>
             <td><b>Balloon Size </b></td>
-            <td><th:block th:text="${order.getBalloonSize()}"></th:block></td>
+            <td><th:block th:text="${session.size}"></th:block></td>
         </tr>
     </table>
     <div>

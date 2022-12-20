@@ -14,18 +14,22 @@
     <h1>Welcome to our Balloon Shop App</h1>
 </header>
 <main>
-    <h3>Ballons</h3>
+    <h3>Balloons</h3>
     <ul>
         <li th:each="balloon : ${balloons} "><th:block th:text="${balloon.name}"></th:block> <th:block th:text="${balloon.description}"></th:block>
+            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
             <form th:method="DELETE"  th:action="@{'/balloons/delete/{id}' (id=${balloon.getId()})}">
                 <button type="submit">
 
                     <i>Delete</i>
                 </button>
             </form>
+            </th:block>
+            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
             <form th:method="POST"  th:action="@{'/balloons/edit-form/{id}' (id=${balloon.getId()})}">
                 <button type="submit">Edit</button>
             </form>
+            </th:block>
         </li>
     </ul>
     <a href="/balloons/add">Add new Baloon</a>

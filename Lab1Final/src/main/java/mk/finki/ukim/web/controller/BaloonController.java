@@ -2,16 +2,20 @@ package mk.finki.ukim.web.controller;
 
 import mk.finki.ukim.model.Balloon;
 import mk.finki.ukim.model.Manufacturer;
+import mk.finki.ukim.model.User;
 import mk.finki.ukim.model.exceptions.ManufacturerDoesntExistException;
 import mk.finki.ukim.service.BalloonService;
 import mk.finki.ukim.service.ManufacturerService;
 import mk.finki.ukim.service.OrderService;
 import mk.finki.ukim.service.impl.BallonServiceImpl;
+import org.h2.engine.Mode;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -38,6 +42,7 @@ public class BaloonController {
     }
 
     @GetMapping("/balloons/add")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String addBalloonPage(Model model)
     {
         List<Manufacturer> manufacturers=manufacturerService.listAll();
@@ -74,6 +79,7 @@ public class BaloonController {
 
     }
     @DeleteMapping("/balloons/delete/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String deleteBalloon(@PathVariable Long id)
     {
         this.balloonService.deleteById(id);
@@ -86,6 +92,74 @@ public class BaloonController {
         model.addAttribute("orders",orderService.getAllOrders());
         model.addAttribute("activeOrder",orderService.getOrder());
         return "userOrders";
+    }
+
+
+    @GetMapping("/access_denied")
+    public String accessDeniedPage(Model model)
+    {
+        return "access_denied";
+    }
+
+    @GetMapping("")
+    public String getHomePage(Model model)
+    {
+        model.addAttribute("balloons",balloonService.listAll());
+        return "listBallons";
+    }
+
+    @PostMapping("")
+    public String choseBalloonColor(@RequestParam String color, HttpServletRequest request)
+    {
+        orderService.placeOrder(color,"prazno","prazno");
+        request.getSession().setAttribute("color",color);
+       // User u=(User)request.getSession().getAttribute("activeUser");
+      //  u.addNewCart();
+        return "redirect:/selectBalloon";
+
+    }
+
+    @GetMapping("/selectBalloon")
+    public String getSelectBallonPage(HttpServletRequest request,Model model)
+    {
+        model.addAttribute("order",orderService.getOrder());
+        model.addAttribute("color",request.getSession().getAttribute("color"));
+        return "selectBalloonSize";
+    }
+
+    @PostMapping("/selectBalloon")
+    public String selectBalloon(@RequestParam String size,HttpServletRequest request)
+    {
+        orderService.getOrder().setBalloonSize(size);
+        return "redirect:/BalloonOrder";
+    }
+
+    @GetMapping("/BalloonOrder")
+    public String getBalloonOrderPage(Model model,HttpServletRequest request)
+    {
+        request.getSession().setAttribute("size",orderService.getOrder().getBalloonSize());
+
+        return "deliveryInfo";
+    }
+
+    @PostMapping("/BalloonOrder")
+    public String inputClientInformation(@RequestParam String clientName,@RequestParam String clientAddress,HttpServletRequest request)
+    {
+        orderService.getOrder().setUserAddress(clientAddress);
+        orderService.getOrder().setUsername(clientName);
+        request.getSession().setAttribute("address",clientAddress);
+
+        request.getSession().setAttribute("name",clientName);
+        return "redirect:/ConfirmationInfo";
+    }
+
+
+    @GetMapping("/ConfirmationInfo")
+    public String getConfirmationInfoPage(HttpServletRequest request)
+    {
+        request.getSession().setAttribute("ip",request.getRemoteAddr());
+        request.getSession().setAttribute("browser",request.getHeader("User-Agent"));
+        return "confirmationInfo.html";
     }
 
 
